@@ -1,7 +1,21 @@
-properties([parameters([choice(choices: ['master', 'feature-1', 'feature-2'], description: 'Select brunch to build', name: 'brunch')])])
+pipeline {
+    agent any
 
-node 'node1'{
-    stage( 'Scm checkout ' ){
-        echo "Pulling changes from the brunch ${params.brunch}"
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
     }
 }
