@@ -1,20 +1,23 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
+        stage('Example Username/Password') {
+            environment {
+                SERVICE_CREDS = credentials('ISkliarov')
+            }
             steps {
-                echo 'Building..'
+                sh 'echo "Service user is $SERVICE_CREDS_USR"'
+                sh 'echo "Service password is $SERVICE_CREDS_PSW"'
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+        stage('Example SSH Username with private key') {
+            environment {
+                SSH_CREDS = credentials('id_rsa')
             }
-        }
-        stage('Deploy') {
             steps {
-                echo 'Deploying....'
+                sh 'echo "SSH private key is located at $SSH_CREDS"'
+                sh 'echo "SSH user is $SSH_CREDS_USR"'
+                sh 'echo "SSH passphrase is $SSH_CREDS_PSW"'
             }
         }
     }
